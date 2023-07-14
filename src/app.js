@@ -66,6 +66,7 @@ app.post('/multiply', (req, res) => {
 
 // POST endpoint for division
 // POST endpoint for division
+// POST endpoint for division
 app.post('/divide', (req, res) => {
   const { num1, num2 } = req.body;
 
@@ -81,18 +82,14 @@ app.post('/divide', (req, res) => {
 
   const result = num1 / num2;
 
-  // Check for underflow
-  if (result < -1000000) {
-    return res.status(400).json({ status: 'error', message: 'Underflow' });
-  }
-
-  // Check for overflow
-  if (result > 1000000) {
-    return res.status(400).json({ status: 'error', message: 'Overflow' });
+  // Check for underflow or overflow
+  if (result < -1000000 || result > 1000000) {
+    return res.status(400).json({ status: 'error', message: 'Underflow or Overflow' });
   }
 
   res.json({ result });
 });
+
 
 
 const server = app.listen(4000, () => {
